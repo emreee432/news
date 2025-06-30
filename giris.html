@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giriş Yap</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #667eea, #764ba2, #6dd5ed, #2193b0);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .form-box {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    .input-group i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      cursor: pointer;
+    }
+
+    .form-box button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .form-box button:hover {
+      background: linear-gradient(to right, #5b69cc, #653f91);
+      transform: scale(1.03);
+    }
+
+    .form-box .forgot {
+      text-align: right;
+      margin-top: 8px;
+    }
+
+    .form-box .forgot a {
+      color: #764ba2;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      display: none;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 500px) {
+      .form-box {
+        margin: 20px;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-box">
+    <h2>Giriş Yap</h2>
+    <div class="error-message" id="errorMsg">E-posta veya şifre hatalı!</div>
+    <div class="input-group">
+      <input type="email" id="email" placeholder="E-posta" required />
+      <i class="fas fa-envelope"></i>
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Şifre" required />
+      <i class="fas fa-eye" id="togglePassword"></i>
+    </div>
+    <button onclick="girisYap()">Giriş Yap</button>
+    <div class="forgot">
+      <a href="#">Şifremi unuttum?</a>
+    </div>
+  </div>
+
+  <script>
+    // Şifre göster/gizle
+    const password = document.getElementById("password");
+    const toggle = document.getElementById("togglePassword");
+    toggle.addEventListener("click", () => {
+      if (password.type === "password") {
+        password.type = "text";
+        toggle.classList.remove("fa-eye");
+        toggle.classList.add("fa-eye-slash");
+      } else {
+        password.type = "password";
+        toggle.classList.remove("fa-eye-slash");
+        toggle.classList.add("fa-eye");
+      }
+    });
+
+    // Giriş kontrol (örnek, backend yok henüz)
+    function girisYap() {
+      const email = document.getElementById("email").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const error = document.getElementById("errorMsg");
+
+      if (email === "" || pass === "") {
+        error.textContent = "Lütfen tüm alanları doldurun.";
+        error.style.display = "block";
+      } else if (email !== "admin@site.com" || pass !== "123456") {
+        error.textContent = "E-posta veya şifre hatalı!";
+        error.style.display = "block";
+      } else {
+        error.style.display = "none";
+        alert("giris basarılı");
+        window.location.href="anasayfa.html";
+        
+        
+
+e;
+
+        // window.location.href = "profil.html";
+      }
+    }
+   
+      
+
+    
+    
+  </script>
+
+ 
+
+</body>
+</html>

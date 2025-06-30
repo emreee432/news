@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mahalle Haberleri</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f0f4f8; }
+    .navbar { background: #1565c0; color: #fff; padding: 15px; font-size: 24px; text-align: center; }
+    .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
+    .haber { background: #fff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; }
+    .haber img { width: 100%; height: 180px; object-fit: cover; }
+    .haber h3 { margin: 15px; font-size: 18px; color: #333; }
+    .haber p { margin: 0 15px 15px; color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="navbar">📢  Haberler</div>
+  <div class="container" id="haberler"></div>
+
+  <script>
+    async function haberleriGetir() {
+      const url = 'https://api.codetabs.com/v1/proxy?quest=https://newsdata.io/api/1/news?apikey=pub_3310329a6c1b7dfc0aa08b8a7ebfdc349f5c1&country=tr&language=tr';
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        const container = document.getElementById('haberler');
+        container.innerHTML = '';
+
+        data.results.forEach(haber => {
+          container.innerHTML += `
+            <div class="haber">
+              <img src="${haber.image_url || 'https://via.placeholder.com/300x180?text=Haber'}" />
+              <h3>${haber.title}</h3>
+              <p>${haber.description || 'Detay bulunamadı.'}</p>
+            </div>
+          `;
+        });
+      } catch (err) {
+        console.error('Haber yüklenemedi:', err);
+        document.getElementById('haberler').innerHTML = '<p style="text-align:center;">Haberler yüklenemedi.</p>';
+      }
+    }
+
+    haberleriGetir();
+  </script>
+</body>
+</html>
